@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "./node_modules/nodemon/bin/nodemon.js src/app.js --exec 'node'"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,7 @@
     "express": "^4.16.4",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.4.19",
+    "morgan": "^1.9.1",
     "nodemon": "^1.18.10",
     "socket.io": "^2.2.0"
   }
