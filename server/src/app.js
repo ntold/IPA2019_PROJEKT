@@ -30,12 +30,12 @@ app.use(cors())
 // Define all the Routes
 const messageRoutes = require("./routes/messages")
 const roomRoutes = require("./routes/rooms")
-// const userRoutes = require("./routes/users")
+const userRoutes = require("./routes/users")
 
 // Routes which should handle requests
 app.use('/api/message', messageRoutes)
 app.use('/api/room', roomRoutes)
-// app.use('/api/user', userRoutes)
+app.use('/api/user', userRoutes)
 
 
 // Connection to mongoDB via mongoose. 127.0.0.1 equals localhost

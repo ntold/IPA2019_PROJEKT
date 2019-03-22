@@ -27,7 +27,7 @@ exports.rooms_get_all = (req, res, next) => {
 
 // Gets a Room by a certain ID
 exports.rooms_get_by_roomID = (req, res, next) => {
-    // .findById in the RoomSchmea
+    // .findById in the Database
     Room.findById(req.params.id, (err, room) => {
         if (err) {
             res.status(500).json({

@@ -27,7 +27,7 @@ exports.messages_get_all = (req, res, next) => {
 
 // Gets a Message in a certain Room
 exports.messages_get_by_roomID = (req, res, next) => {
-    // .find searches the roomID
+    // .find searches for the roomID
     Message.find({ roomID: req.params.roomid }, (err, messages) => {
         if (err) {
             res.status(500).json({
