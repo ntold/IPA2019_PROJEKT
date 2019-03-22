@@ -22,12 +22,6 @@ module.exports = (req, res, next) => {
         // jwt.verify checks with the secretKey, if the token is correct. 
         const decoded = jwt.verify(token, process.env.JWT_KEY);
 
-        console.log(req.params.id)
-
-        console.log(decoded.userId)
-
-        Room.find()
-
         // If so, the appliaction can carry on 
         next();
     } catch (error) {
