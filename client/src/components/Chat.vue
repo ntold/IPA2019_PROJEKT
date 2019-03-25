@@ -75,21 +75,6 @@
           </div>
           <v-icon color="orange" class="sendIcon">send</v-icon>
         </div>
-
-        <!-- <div class="inputMessage">
-          <div class="inputText">
-            <v-text-field
-              xs12
-              label="New Message"
-              v-model="message"
-              outline
-              @keyup.enter="sendMessage()"
-            ></v-text-field>
-          </div>
-          <div class="sendIcon">
-            <v-icon size="50" color="orange" v-on:click="sendMessage()">send</v-icon>
-          </div>
-        </div>-->
       </v-flex>
     </v-layout>
   </v-app>
@@ -167,7 +152,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .message-left {
   background: rgb(0, 130, 180);
   color: white;

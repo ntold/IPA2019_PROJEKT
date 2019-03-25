@@ -1,38 +1,50 @@
 <template>
   <v-app>
-    <v-toolbar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
-    </v-toolbar>
-
-    <v-content>
-      <HelloWorld/>
-    </v-content>
+    <v-layout row>
+      <v-flex xs1 v-if="isLoggedIn">
+        <Sidebar class="Sidebar"></Sidebar>
+      </v-flex>
+      <v-flex xs2 v-if="isLoggedIn">
+        <AllRooms class="AllRooms"></AllRooms>
+      </v-flex>
+      <v-flex xs12>
+        <router-view class="RouterView" :key="$route.fullPath"></router-view>
+      </v-flex>
+    </v-layout>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import AllRooms from "./components/AllRooms";
+import Sidebar from "./components/Sidebar";
+import store from "@/store/store";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
+    AllRooms,
+    Sidebar
   },
-  data () {
+  data() {
     return {
-      //
-    }
+      isLoggedIn: store.state.token
+    };
   }
-}
+};
 </script>
+
+<style>
+#app {
+  overflow: hidden;
+}
+.ChatRooms {
+  height: 100%;
+}
+.Sidebar {
+  height: 100%;
+}
+.RouterView {
+  height: 100%;
+}
+</style>
+

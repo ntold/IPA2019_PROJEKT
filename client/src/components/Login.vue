@@ -58,7 +58,7 @@
 
 <script>
 import api from "../services/api.js";
-import store from "@/store/index";
+import store from "@/store/store";
 
 export default {
   name: "Login",
@@ -94,12 +94,11 @@ export default {
         this.snackbar = true;
       }
     }
-  },
-  created() {}
+  }
 };
 </script>
 
-<style>
+<style scoped>
 .scroll {
   height: 100%;
   overflow-y: scroll;
