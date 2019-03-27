@@ -44,10 +44,11 @@ exports.messages_create_message = (req, res, next) => {
             res.status(500).json({
                 error: err
             });
+        } else {
+            res.status(200).json({
+                message: "Message Sent!"
+            })
         };
-        res.status(200).json({
-            message: "Message Sent!"
-        });
     });
 }
 

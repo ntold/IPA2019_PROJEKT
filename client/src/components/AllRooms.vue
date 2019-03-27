@@ -1,5 +1,5 @@
 <template>
-  <v-layout>
+  <v-layout id="ChatRooms">
     <v-flex xs12 colored>
       <div class="grey">
         <v-navigation-drawer permanent>
@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     sendRoom: function() {
-      api().post("/api/room", this.room);
+      this.$store.dispatch("addGroup", this.room);
     },
     goRoom: function(item) {
       this.$router.push({
@@ -113,9 +113,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 #ChatRooms {
-  height: 100%;
+  min-height: 100%;
 }
 
 .v-navigation-drawer .v-list {

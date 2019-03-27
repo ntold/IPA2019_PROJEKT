@@ -82,6 +82,11 @@ let store = new Vuex.Store({
       state.chats.push(chats)
     },
 
+    // Add a room
+    ADD_ROOM(state, room) {
+      state.rooms.push(room)
+    },
+
     NEW_MESSAGE(state, newMessage) {
       if (newMessage !== "clear") {
         if (state.newMessage.indexOf(newMessage)) {
@@ -144,7 +149,12 @@ let store = new Vuex.Store({
 
     // Add Group
     async addGroup(context, room) {
-
+      try {
+        const response = await api().post("/api/room", room)
+        context.commit("SET_ROOM", response.data)
+      } catch (error) {
+        console.log("error", error)
+      }
     },
 
     // Fetch Chats
