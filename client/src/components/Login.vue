@@ -8,7 +8,7 @@
 <template>
   <div id="Login">
     <!-- If the user is not Logged in, show the Login-Form -->
-    <v-container v-if="!isLoggedIn" fluid fill-height>
+    <v-container v-if="!isLoggedIn && !firstTime" fluid fill-height>
       <v-layout align-center justify-center>
         <v-flex xs4>
           <v-card class="elevation-12">
@@ -81,6 +81,8 @@ export default {
       timeout: 6000,
       error: "",
 
+      firstTime: false,
+
       user: {},
       isLoggedIn: store.state.token
     };
@@ -98,7 +100,11 @@ export default {
           this.$store.dispatch("setUserID", response.data.userID);
           this.$store.dispatch("setToken", response.data.token);
 
-          this.$router.go({ path: "/home" });
+          if (response.data.firstTime) {
+            this.firstTime = true;
+            this.$router.push({ path: "/new" });
+          }
+          this.$router.go({ path: "/" });
         } catch (error) {
           this.error = error.response.data.message;
           this.snackbar = true;

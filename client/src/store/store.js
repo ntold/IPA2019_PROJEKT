@@ -11,6 +11,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 import api from "@/services/api.js";
+import { router } from '../router';
 import * as io from "socket.io-client";
 
 // All WebSocket Requets on port 4000
@@ -26,7 +27,7 @@ let store = new Vuex.Store({
         user: state.user,
         token: state.token,
         userID: state.userID,
-        isLoggedIn: state.isLoggedIn
+        isLoggedIn: state.isLoggedIn,
       })
     })
   ],
@@ -162,6 +163,17 @@ let store = new Vuex.Store({
       }
     },
 
+    // Change password
+    async changePassword(context, password) {
+      try {
+        console.log(password)
+        const response = await api().post(`/api/user/pw/`, password)
+        console.log(response)
+      } catch (error) {
+        console.log("error:", error)
+      }
+    },
+
     // Fetch all Rooms where the current User is in from the Backend
     async fetchRooms(context) {
       // While Fetching, set the LoadingStatus to Loading
@@ -176,14 +188,13 @@ let store = new Vuex.Store({
         context.commit('SET_ROOMS', response.data)
 
       } catch (error) {
-
+        console.log(error);
         // If the access is denied, log out the User and redirect to the Login-Page 
         store.dispatch("setToken", null);
         store.dispatch("setUser", null);
         store.dispatch("setUserID", null);
 
-        // TODO:
-        this.$router.go({
+        router.go({
           path: "/login"
         });
 
@@ -203,8 +214,8 @@ let store = new Vuex.Store({
     // Delete a Room
     async deleteRoom(context, room) {
       try {
-        await api().delete("/api/room", room.roomID)
-        console.log(room.roomID)
+        await api().delete(`api/room/${room}`)
+
       } catch (error) {
         console.log(error)
       }
@@ -221,7 +232,12 @@ let store = new Vuex.Store({
         // Send the Messages to the SET_CHATS Mutation
         context.commit('SET_CHATS', response.data)
       } catch (error) {
-        console.log("error", error)
+        console.log(error.message)
+
+        router.go({
+          path: "/login"
+        });
+
       }
     },
 

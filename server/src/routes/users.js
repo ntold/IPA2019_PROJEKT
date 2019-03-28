@@ -31,6 +31,9 @@ router.get('/', checkAuth, UserController.users_show_all);
 // Get User by ID
 router.delete("/:id", checkAuth, UserController.users_delte_user)
 
+// Change Password
+router.post("/pw", checkAuth, UserController.users_change_password)
+
 
 // Export the module, to accsess this date from other files
 module.exports = router;

@@ -92,7 +92,8 @@ exports.users_login_user = (req, res, next) => {
                             message: "Auth successful",
                             token: token,
                             username: user.username,
-                            userID: user._id
+                            userID: user._id,
+                            firstTime: user.firstTime
                         });
 
                     } else {
@@ -136,5 +137,21 @@ exports.users_delte_user = (req, res, next) => {
         res.status(200).json({
             message: "User deleted"
         });
+    })
+}
+
+exports.users_change_password = (req, res, next) => {
+    bcrypt.hash(req.body.password, 10, (err, hash) => {
+        User.findByIdAndUpdate(req.body.userID, { password: hash, firstTime: false }, (err, user) => {
+            if (err) {
+                res.status(500).json({
+                    error: err
+                });
+            };
+            // If no error occured, it sends a message. Status Code 200 means "OK"
+            res.status(200).json({
+                message: "Password changed"
+            });
+        })
     })
 }

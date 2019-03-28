@@ -90,8 +90,8 @@ export default {
       });
     },
     goToChange: function() {
-      this.$router.go({
-        path: "/"
+      this.$router.push({
+        path: "/new"
       });
     }
   },

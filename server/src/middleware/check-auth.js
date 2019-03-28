@@ -25,17 +25,24 @@ module.exports = (req, res, next) => {
         // Check if a User is in a Chatroom or not
         if (req.params.roomid) {
             Room.findById(req.params.roomid, (err, room) => {
-                if (room.roomUsersID.includes(decoded.userId)) {
-                    next();
-                } else {
-                    return res.status(403).json({
-                        message: 'Forbidden'
+                if (err || room === null) {
+                    return res.status(400).json({
+                        message: 'Bad request'
                     });
+                } else {
+                    if (room.roomUsersID.includes(decoded.userId)) {
+                        next();
+                    } else {
+                        return res.status(403).json({
+                            message: 'Forbidden'
+                        });
+                    }
                 }
             })
         } else {
             next()
         }
+
     } catch (error) {
         // If jwt.verify failes, means the token is incorret, the appliaction will deny 
         // access to the database and stops the requiest right here.

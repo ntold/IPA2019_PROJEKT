@@ -15,6 +15,8 @@ import AllRooms from "./components/AllRooms.vue";
 import Login from "./components/Login.vue";
 import store from "./store/store"
 import CreateNewChat from './components/CreateNewChat'
+import NewPassword from './components/NewPassword'
+
 
 Vue.use(Router);
 
@@ -31,6 +33,11 @@ export const router = new Router({
       path: "/add",
       name: "add",
       component: CreateNewChat,
+    },
+    {
+      path: "/new",
+      name: "newpassword",
+      component: NewPassword,
     },
     {
       path: "/chat/:id/:roomname",

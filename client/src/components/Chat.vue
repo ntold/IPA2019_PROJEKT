@@ -87,6 +87,7 @@
 <script>
 // Import mapState from Vuex to get all the States from the Store
 import { mapState } from "vuex";
+import { router } from "../router";
 var format = require("date-format");
 
 export default {
@@ -117,7 +118,10 @@ export default {
       this.message = "";
     },
     deleteRoom: function() {
-      this.$store.dispatch(deleteRoom, this.room);
+      this.$store.dispatch("deleteRoom", this.$route.params.id);
+      router.go({
+        path: "/"
+      });
     }
   },
   // Created() gets called when the site mounts
