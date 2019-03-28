@@ -1,3 +1,12 @@
+/*
+ * Author:      Nico Berchtold
+ * File name:   api.js
+ * Version:     1.0
+ * Description: API calls to the Backend
+ *              with the JWT Token in the header
+ *        
+ */
+
 import axios from 'axios'
 import store from "@/store/store";
 

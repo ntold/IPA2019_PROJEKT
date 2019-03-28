@@ -47,8 +47,8 @@ exports.messages_create_message = (req, res, next) => {
         } else {
             res.status(200).json({
                 message: "Message Sent!"
-            })
-        };
+            });
+        }
     });
 }
 
@@ -64,3 +64,35 @@ exports.messsages_delete_message = (req, res, next) => {
         });
     })
 }
+
+// WebSocket listens on port 4000
+const io = require('socket.io')(4000);
+
+// On Connection
+io.on('connection', socket => {
+    // Join a Socket
+    socket.on('create', session => {
+
+        socket.join(session);
+        console.log("User Connected on Room:", session)
+    });
+
+    // Leave a Socket
+    socket.on('leave', session => {
+        socket.leave(session);
+        console.log("User disconnected on session", session)
+    });
+
+    // Sends the Message to the Sockets ans saves it in the database
+    socket.on('save-message', data => {
+        Message.create(data, (err, post) => {
+            if (err) {
+                console.log(error)
+            } else {
+                console.log("message sent")
+            }
+        });
+        io.in(data.roomID).emit('new-message', { message: data });
+    });
+
+});

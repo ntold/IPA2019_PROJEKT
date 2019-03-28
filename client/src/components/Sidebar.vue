@@ -1,13 +1,22 @@
+<!--
+* Author: Nico Berchtold
+* File name: Sidebar.Vue
+* Version: 1.0
+* Description: Sidebar with the Menu and the Profilpicture
+-->
+
 <template>
   <div id="Sidebar">
     <v-layout align-center justify-space-around wrap pt-4>
       <div class="text-xs-center">
         <v-menu v-model="menu" :close-on-content-click="false" :nudge-width="200" offset-x>
           <v-btn slot="activator" fab icon x-large>
+            <!-- Profilpic -->
             <v-avatar color="grey" size="50px">
               <span class="white--text headline">{{username.charAt(4)}}</span>
             </v-avatar>
           </v-btn>
+          <!-- Menu -->
           <v-card>
             <v-list>
               <v-list-tile>

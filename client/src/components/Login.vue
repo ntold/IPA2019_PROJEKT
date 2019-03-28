@@ -1,5 +1,13 @@
+<!--
+* Author: Nico Berchtold
+* File name: Login.Vue
+* Version: 1.0
+* Description: Login for the
+-->
+
 <template>
   <div id="Login">
+    <!-- If the user is not Logged in, show the Login-Form -->
     <v-container v-if="!isLoggedIn" fluid fill-height>
       <v-layout align-center justify-center>
         <v-flex xs4>
@@ -33,6 +41,7 @@
         </v-flex>
       </v-layout>
     </v-container>
+    <!-- If the user is Logged-in, say Hello -->
     <v-container v-else>
       <v-layout>
         <v-flex xs4 offset-xs4>
@@ -57,6 +66,7 @@
 </template>
 
 <script>
+// Import the API
 import api from "../services/api.js";
 import store from "@/store/store";
 
@@ -64,6 +74,7 @@ export default {
   name: "Login",
   data() {
     return {
+      // Properties for the Snackbar
       snackbar: false,
       color: "red",
       mode: "",
@@ -74,7 +85,10 @@ export default {
       isLoggedIn: store.state.token
     };
   },
+  // All Functions
   methods: {
+    // If the Username and Password field is filled out,
+    // send the user to the backend
     login: async function() {
       if (this.user.username && this.user.password) {
         try {
@@ -99,6 +113,7 @@ export default {
 </script>
 
 <style scoped>
+/* Styling for the Component */
 .scroll {
   height: 100%;
   overflow-y: scroll;

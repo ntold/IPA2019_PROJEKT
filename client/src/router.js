@@ -1,11 +1,20 @@
+/*
+ * Author:      Nico Berchtold
+ * File name:   router.js
+ * Version:     1.0
+ * Description: Every Route from the Frontend is defined here
+ *              
+ *        
+ */
+
+// Import all Views
 import Vue from "vue";
 import Router from "vue-router";
-// import Chat from "./components/Chat.vue";
+import Chat from "./components/Chat.vue";
 import AllRooms from "./components/AllRooms.vue";
 import Login from "./components/Login.vue";
 import store from "./store/store"
-
-// import CreateNewChat from './components/CreateNewChat'
+import CreateNewChat from './components/CreateNewChat'
 
 Vue.use(Router);
 
@@ -18,16 +27,16 @@ export const router = new Router({
       name: "allrooms",
       component: AllRooms,
     },
-    //{
-    //   path: "/add",
-    //   name: "add",
-    //   component: CreateNewChat,
-    // },
-    // {
-    //   path: "/chat/:id/:roomname",
-    //   name: "chat",
-    //   component: Chat
-    // },
+    {
+      path: "/add",
+      name: "add",
+      component: CreateNewChat,
+    },
+    {
+      path: "/chat/:id/:roomname",
+      name: "chat",
+      component: Chat
+    },
     {
       path: "/login",
       name: "login",
@@ -40,6 +49,9 @@ export const router = new Router({
   ]
 });
 
+// Routguard
+// Checks befor every route, if the user is allowed
+// to get there
 router.beforeEach((to, from, next) => {
   const publicPages = ['/login']
   const authRequired = !publicPages.includes(to.path);

@@ -1,3 +1,11 @@
+/*
+ * Author:      Nico Berchtold
+ * File name:   Room.js
+ * Version:     1.0
+ * Description: Schmea for every Database entry for a Room
+ *                
+ */
+
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema;
 

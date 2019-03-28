@@ -22,8 +22,20 @@ module.exports = (req, res, next) => {
         // jwt.verify checks with the secretKey, if the token is correct. 
         const decoded = jwt.verify(token, process.env.JWT_KEY);
 
-        // If so, the appliaction can carry on 
-        next();
+        // Check if a User is in a Chatroom or not
+        if (req.params.roomid) {
+            Room.findById(req.params.roomid, (err, room) => {
+                if (room.roomUsersID.includes(decoded.userId)) {
+                    next();
+                } else {
+                    return res.status(403).json({
+                        message: 'Forbidden'
+                    });
+                }
+            })
+        } else {
+            next()
+        }
     } catch (error) {
         // If jwt.verify failes, means the token is incorret, the appliaction will deny 
         // access to the database and stops the requiest right here.

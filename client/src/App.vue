@@ -1,3 +1,10 @@
+<!--
+* Author: Nico Berchtold
+* File name: App.Vue
+* Version: 1.0
+* Description: Main View
+-->
+
 <template>
   <v-app>
     <v-layout row>
@@ -15,6 +22,7 @@
 </template>
 
 <script>
+// Import the other Components
 import AllRooms from "./components/AllRooms";
 import Sidebar from "./components/Sidebar";
 import store from "@/store/store";

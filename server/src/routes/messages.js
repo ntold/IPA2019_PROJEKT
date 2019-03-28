@@ -32,27 +32,6 @@ router.post('/', checkAuth, MessageController.messages_create_message)
 // Delete message
 router.delete("/:id", checkAuth, MessageController.messsages_delete_message)
 
-// TODO: KOMMENTIEREN
-const io = require('socket.io')(4000);
-
-io.on('connection', function (socket) {
-    socket.on('create', function (session) {
-
-        socket.join(session);
-        console.log("User Connected on Room:", session)
-    });
-
-    socket.on('leave', function (session) {
-        socket.leave(session);
-        console.log("User disconnected on session", session)
-    });
-
-    socket.on('save-message', (data) => {
-        console.log("Message:", data)
-        io.in(data.room).emit('new-message', { message: data });
-    });
-
-});
 
 // Export the module, to accsess this date from other files
 module.exports = router;

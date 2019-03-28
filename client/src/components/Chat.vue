@@ -1,7 +1,15 @@
+<!--
+* Author: Nico Berchtold
+* File name: Chat.Vue
+* Version: 1.0
+* Description: Send and get Messages here
+-->
+
 <template>
   <v-app>
     <v-layout row>
       <v-flex xs12>
+        <!-- Header -->
         <v-toolbar flat height="100">
           <v-menu right :nudge-width="200">
             <v-btn slot="activator" dark icon>
@@ -29,11 +37,11 @@
           <v-toolbar-title>{{ compRoomName }}</v-toolbar-title>
         </v-toolbar>
         <v-divider></v-divider>
-
+        <!-- Chat -->
         <v-card
           flat
           class="scroll-y chat"
-          color="#607d8b"
+          color="#DADDDD"
           v-chat-scroll="{always: false, smooth: true}"
         >
           <div
@@ -50,19 +58,15 @@
             v-bind:key="item.id"
           >
             <div class="message-body">
-              <div class="header">
-                <!-- <strong>{{item.username}}</strong> -->
-              </div>
+              <div class="header"></div>
               <div class="content">
                 <p>{{item.message}}</p>
-                <div class="date">
-                  <!-- <v-icon small v-on:click="deleteMessage(item)">cleare</v-icon> -->
-                  {{ item.created_date }}
-                </div>
+                <div class="date">{{ item.createdDate }}</div>
               </div>
             </div>
           </div>
         </v-card>
+        <!-- New Message -->
         <div class="messageContainer">
           <div class="sendContainer">
             <input
@@ -81,7 +85,7 @@
 </template>
 
 <script>
-import api from "../services/api.js";
+// Import mapState from Vuex to get all the States from the Store
 import { mapState } from "vuex";
 var format = require("date-format");
 
@@ -89,9 +93,6 @@ export default {
   name: "chat",
   data() {
     return {
-      // RoomID: this.$route.params.id,
-      // RoomName: this.$route.params.roomname,
-
       username: this.$store.state.user,
       message: "",
       typing: "",
@@ -102,29 +103,27 @@ export default {
     sendMessage: async function() {
       // Prepare Message
       let chat = {
-        room: this.$route.params.id,
-        room_name: this.compRoomName,
+        roomID: this.$route.params.id,
+        roomName: this.compRoomName,
         username: this.username,
         message: this.message,
-        created_date: this.date
+        createdDate: this.date
       };
 
-      // Send new Message to Vuex
+      // Send new Message to the Store
       this.$store.dispatch("sendMessage", chat);
 
       // Clear things up
       this.message = "";
     },
-    deleteMessage: async function(item) {
-      await api().delete(`/api/chat/${item._id}`);
-    },
-    deleteRoom: async function(item) {
-      await api().delete(`/api/room/${this.$route.params.id}`);
-      this.$router.go({
-        path: "/"
-      });
+    deleteRoom: function() {
+      this.$store.dispatch(deleteRoom, this.room);
     }
   },
+  // Created() gets called when the site mounts
+  // Runs the fetchChat and setURL function in the Store
+  // Sends a "clear-message" if the "unseen room" (unseen message
+  // in this room) has been entered
   created() {
     this.$store.dispatch("setUrl", this.$route.params.id);
     this.$store.dispatch("fetchChats", this.$route.params.id);
@@ -134,32 +133,35 @@ export default {
     }
   },
   computed: {
+    // Maps trough all the States in the Store and returns them
     ...mapState({
-      newMessage: state => state.newMessage
+      newMessage: state => state.newMessage,
+      chats: state => state.chats
     }),
+    // Get the latest Roomname from the URL
     compRoomName: function() {
       var RoomName = this.$route.params.roomname;
       return RoomName;
     },
+    // Get the latest RooID from the URL
     compRoomID: function() {
       var RoomID = this.$route.params.id;
       return RoomID;
-    },
-    chats: function() {
-      return this.$store.state.chats;
     }
   }
 };
 </script>
 
 <style scoped>
+/* Styling for the component */
+
 .message-left {
   background: rgb(0, 130, 180);
   color: white;
   float: left;
   margin: 10px 0px 10px 20px;
   clear: both;
-  border-radius: 30px;
+  border-radius: 30px !important;
 }
 
 .message-body {
@@ -174,7 +176,7 @@ export default {
   color: black;
   margin: 10px 20px 20px 0px;
   clear: both;
-  border-radius: 30px;
+  border-radius: 30px !important;
 }
 
 .date {
@@ -188,7 +190,7 @@ export default {
   position: fixed;
   bottom: 0;
   width: 77vw;
-  background-color: #607d8b;
+  background-color: #dadddd;
   display: inline-flex;
 }
 
@@ -221,7 +223,7 @@ export default {
 }
 
 .chat {
-  height: 73.5vh;
+  height: 75vh;
   padding-bottom: 10px;
 }
 </style>
