@@ -40,29 +40,29 @@
             </div>
 
             <!-- Creates a list for all Rooms -->
-            <v-list-tile
-              :class="{'activeRoom': item._id == $route.params.id,
-              'new-Message': !newMessage.indexOf(item._id)}"
-              class="hover"
-              v-for="item in filteredRooms"
-              v-bind:key="item.id"
-            >
-              <!-- If  the Chat is a Groupchat, show a Groupicon, else show a Usericon -->
-              <v-list-tile-action v-if="item.isGroupchat === true">
-                <v-icon color="white">group</v-icon>
-              </v-list-tile-action>
-              <v-list-tile-action v-else>
-                <v-icon color="white">person</v-icon>
-              </v-list-tile-action>
+  <v-list-tile
+    :class="{'activeRoom': item._id == $route.params.id,
+    'new-Message': !newMessage.indexOf(item._id)}"
+    class="hover"
+    v-for="item in filteredRooms"
+    v-bind:key="item.id"
+  >
+    <!-- If  the Chat is a Groupchat, show a Groupicon, else show a Usericon -->
+    <v-list-tile-action v-if="item.isGroupchat === true">
+      <v-icon color="white">group</v-icon>
+    </v-list-tile-action>
+    <v-list-tile-action v-else>
+      <v-icon color="white">person</v-icon>
+    </v-list-tile-action>
 
-              <!-- Show a single Room with Name and Description-->
-              <v-list-tile-content style="cursor: pointer" @click="goToRoom(item)">
-                <v-list-tile-title class="white--text">
-                  <strong>{{ item.roomName }}</strong>
-                </v-list-tile-title>
-                <v-list-tile-sub-title class="white--text">{{ item.roomDescription }}</v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-list-tile>
+    <!-- Show a single Room with Name and Description-->
+    <v-list-tile-content style="cursor: pointer" @click="goToRoom(item)">
+      <v-list-tile-title class="white--text">
+        <strong>{{ item.roomName }}</strong>
+      </v-list-tile-title>
+      <v-list-tile-sub-title class="white--text">{{ item.roomDescription }}</v-list-tile-sub-title>
+    </v-list-tile-content>
+  </v-list-tile>
           </v-list>
         </v-navigation-drawer>
       </div>
@@ -124,16 +124,16 @@ export default {
       rooms: state => state.rooms
     }),
     // Function to Search a Room
-    filteredRooms: function() {
-      return this.rooms.filter(room => {
-        // "i" means, it doenst matter if its upper or lower case
-        var pattern = new RegExp(this.search, "i");
-        return (
-          // Searches for a RoomName or a RoomDescription
-          room.roomName.match(pattern) || room.roomDescription.match(pattern)
-        );
-      });
-    }
+filteredRooms: function() {
+  return this.rooms.filter(room => {
+    // "i" means, it doenst matter if its upper or lower case
+    var pattern = new RegExp(this.search, "i");
+    return (
+      // Searches for a RoomName or a RoomDescription
+      room.roomName.match(pattern) || room.roomDescription.match(pattern)
+    );
+  });
+}
   }
 };
 </script>

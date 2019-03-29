@@ -58,7 +58,9 @@
             v-bind:key="item.id"
           >
             <div class="message-body">
-              <div class="header"></div>
+              <div class="header">
+                <b>{{item.username}}</b>
+              </div>
               <div class="content">
                 <p>{{item.message}}</p>
                 <div class="date">{{ item.createdDate }}</div>
@@ -172,6 +174,7 @@ export default {
   display: block;
   padding: 20px;
   margin-bottom: 2px;
+  font-size: 18px;
 }
 
 .message-right {
@@ -188,6 +191,7 @@ export default {
   text-align: right;
   font-size: 10px;
   font-style: italic;
+  color: lightgrey;
 }
 
 .messageContainer {
@@ -229,5 +233,9 @@ export default {
 .chat {
   height: 75vh;
   padding-bottom: 10px;
+}
+
+.header {
+  font-size: 10px;
 }
 </style>

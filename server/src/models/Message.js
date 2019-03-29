@@ -1,3 +1,11 @@
+/*
+ * Author:      Nico Berchtold
+ * File name:   Message.js
+ * Version:     1.0
+ * Description: Schmea for every Database entry for a Message
+ *                
+ */
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 

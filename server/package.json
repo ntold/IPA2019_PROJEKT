@@ -1,3 +1,11 @@
+/*
+ * Author:      Nico Berchtold
+ * File name:   app.js
+ * Version:     1.0
+ * Description: The main-file of the backend
+ *              Initialise express and other dependencies
+ *              Redirects Requests to controller
+ */
 {
   "name": "server",
   "version": "1.0.0",

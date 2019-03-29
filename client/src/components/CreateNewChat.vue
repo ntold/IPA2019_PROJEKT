@@ -100,7 +100,7 @@ export default {
         } else {
           this.room.isGroupchat = true;
         }
-        this.error = `${this.room.roomName} has succ created!`;
+        this.error = `${this.room.roomName} created!`;
         this.color = "green";
         this.snackbar = true;
         // Sends the Room to the Store
