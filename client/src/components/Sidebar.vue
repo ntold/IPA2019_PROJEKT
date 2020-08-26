@@ -2,7 +2,7 @@
 * Author: Nico Berchtold
 * File name: Sidebar.Vue
 * Version: 1.0
-* Description: Sidebar with the Menu and the Profilpicture
+* Description: Sidebar with the menu and the profile picture
 -->
 
 <template>
