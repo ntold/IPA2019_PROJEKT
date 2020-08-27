@@ -2,7 +2,7 @@
  * Author:      Nico Berchtold
  * File name:   Message.js
  * Version:     1.0
- * Description: Schmea for every Database entry for a Message
+ * Description: Schema for every message entry in database
  *                
  */
 
