@@ -8,7 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "date-format": "^2.0.0",
     "socket.io": "^2.2.0",
     "socket.io-client": "^2.2.0",
